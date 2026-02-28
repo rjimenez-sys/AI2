@@ -19,7 +19,20 @@ SQLite es un motor de base de datos relacional muy ligero que se integra directa
 4. Conecta un emulador o dispositivo físico y ejecuta `flutter run`.
 
 ## Captura de pantalla
-*(Nota: Aquí puedes subir una captura de pantalla real de tu app funcionando y reemplazar este texto con `![App](ruta_de_la_imagen.png)`)*
+1.- La captura "AplicacionMenú" muestra la instalación en el emulador
+assets/AplicacionMenu.png
+
+2.- La captura "EjecucionAplicacion" muestra la ejecución de la aplicación
+assets/EjecucionAplicacion.png
+
+3.- La captura "FormularioRegistro" muestra la aplicación ya cargada esperando el ingreso de los datos
+assets/FormularioRegistro.png
+
+4.- La captura "IngresoDatos" muestra el ingreso de los datos al formulario
+assets/IngresoDatos.png
+
+5.- La captura "ValidacionResultados" muestra el perfil creado en base a los datos ingresados
+assets/ValidacionResultados.png
 
 ## Estructura del proyecto
 La arquitectura del proyecto está organizada en la carpeta `lib` de la siguiente manera:

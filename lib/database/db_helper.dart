@@ -1,4 +1,6 @@
+import 'dart:io';
 import 'package:sqflite/sqflite.dart';
+import 'package:sqflite_common_ffi/sqflite_ffi.dart';
 import 'package:path/path.dart';
 import '../models/user_model.dart';
 
@@ -12,13 +14,17 @@ class DbHelper {
   }
 
   Future<Database> _initDb() async {
-    // Requisito: Crear una base de datos local llamada usuario.db
+    // ESTA ES LA MAGIA NUEVA: Si la app corre en Linux, Windows o Mac, usamos FFI
+    if (Platform.isWindows || Platform.isLinux || Platform.isMacOS) {
+      sqfliteFfiInit();
+      databaseFactory = databaseFactoryFfi;
+    }
+
     String path = join(await getDatabasesPath(), 'usuario.db');
     return await openDatabase(
       path,
       version: 1,
       onCreate: (db, version) async {
-        // Requisito: Crear una tabla llamada usuarios
         await db.execute('''
           CREATE TABLE usuarios (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -31,13 +37,11 @@ class DbHelper {
     );
   }
 
-  // Requisito: Guardar los datos del formulario en SQLite
   Future<int> insertUser(User user) async {
     final db = await database;
     return await db.insert('usuarios', user.toMap());
   }
 
-  // Requisito: Consultar el último usuario registrado
   Future<User?> getLastUser() async {
     final db = await database;
     final List<Map<String, dynamic>> maps = await db.query(
